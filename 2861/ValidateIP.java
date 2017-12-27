@@ -23,13 +23,14 @@ public class ValidateIP {
 		if (ip.startsWith(".")) return false;
 		if (ip.endsWith(".")) return false;
 		int countdot = 0;
-		for (int i=0;i<ip.length();i++) { //check consecutive dots
+		for (int i=0;i<ip.length();i++) { //check exactly 3 dots
 			if (ip.charAt(i)=='.') {
 				countdot++;
 			}
 	    }
- 		String twodots = new String("..");
-		if (ip.contains(twodots)) return false;
+		if (countdot != 3) return false; 
+ 		String twodots = new String(".."); 
+		if (ip.contains(twodots)) return false;  // check consecutive dots
 		if (countdot != 3) return false;
 	    for (int i = 0; i < ip.length(); i++) {  //check alphabets and special char
 	        if ((ip.charAt(i) < '0' || ip.charAt(i) > '9') && ip.charAt(i) != '.') {
