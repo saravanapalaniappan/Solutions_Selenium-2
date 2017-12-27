@@ -1,4 +1,4 @@
-package com.htc.eligibility;
+package com.htc.classexercise;
 
 import java.util.Scanner;
 
