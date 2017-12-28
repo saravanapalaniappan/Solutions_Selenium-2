@@ -1,28 +1,27 @@
-package com.htc.product;
+package com.java.newproduct;
 
+import java.util.ArrayList;
+import java.util.*;
 import java.util.Scanner;
+
+
 
 public class Stores {
 
-	public static Product[] listOfProduct = new Product[5];
+ 	static ArrayList<Product> listOfProduct = new ArrayList<Product>();
 
 	public static void main(String[] args) {
 		
-		listOfProduct[0] = new Product(101,"Toy Train",15.01,85);      
-		listOfProduct[1] = new Product(102,"Action Figure",7.01,35);      
-		listOfProduct[2] = new Product(103,"Teddy Bear",13.01,25);      
-		listOfProduct[3] = new Product(104,"Doll",9.01,15);      
-		listOfProduct[4] = new Product(105,"Ball",4.01,45);      
-	
-	    for (int i = 0; i < listOfProduct.length; i++){
-            System.out.print(listOfProduct[i].getProductId()+",");
-            System.out.print(listOfProduct[i].getProductName()+",");
-            System.out.print(listOfProduct[i].getPrice()+",");
-            System.out.print(listOfProduct[i].getQuantityOnHand()+",");
-            System.out.print(listOfProduct[i].getReorderLevel()+",");
-            System.out.print(listOfProduct[i].getReorderQty()+",");
-            System.out.println();
-	    }
+		listOfProduct.add(new Product(101,"Toy Train",15.01,85));
+		listOfProduct.add(new Product(102,"Action Figure",7.01,35));
+		listOfProduct.add(new Product(103,"Teddy Bear",13.01,25));
+		listOfProduct.add(new Product(104,"Doll",9.01,55));
+		listOfProduct.add(new Product(105,"Ball",4.01,45));
+				
+		for (int i = 0; i < listOfProduct.size(); i++ ){
+			System.out.println(listOfProduct.get(i));
+		}
+
 		Scanner userinput = new Scanner(System.in);
 		System.out.println("Enter Product code of item to be sold");
 		int productCode = userinput.nextInt();
@@ -48,22 +47,35 @@ public class Stores {
 			System.out.println("Product ID "+e.getProductCode() +" not found in list of Products available");
 		}
 		userinput.close();
+		System.out.println();
+		System.out.println();
+		System.out.println("Starting Comparable logic for Question 2");
+		System.out.println("Printing Data Before Sort");
+		for (int i = 0; i < listOfProduct.size(); i++ ){
+			System.out.println(listOfProduct.get(i));
+		}
+		 System.out.println("Now Printing Sorted by Price");
+	     ComparatorProduct sortPrice = new ComparatorProduct();
+	     Collections.sort(listOfProduct, sortPrice);
+	     for (int i = 0; i < listOfProduct.size(); i++ ){
+				System.out.println(listOfProduct.get(i));
+			}
 	}
 	static double sellItem(int productCode, int qtyRequired) throws ProductNotFoundException, InsufficientQuantityException{
 		double total = 0.00;
 		int procure = 0;
 		boolean prodidfound = false; 
-		for (int i = 0; i < listOfProduct.length; i++) {
-			if (productCode == listOfProduct[i].getProductId()) {
+		for (int i = 0; i < listOfProduct.size(); i++) {
+			if (productCode == listOfProduct.get(i).getProductId()) {
 				prodidfound = true;
-				total = listOfProduct[i].getPrice() * qtyRequired;
-				procure = listOfProduct[i].getQuantityOnHand() - qtyRequired;
+				total = listOfProduct.get(i).getPrice() * qtyRequired;
+				procure = listOfProduct.get(i).getQuantityOnHand() - qtyRequired;
 				if (procure < 0){
 					throw new InsufficientQuantityException(procure);
 				}
 				else {
-					listOfProduct[i].setQuantityOnHand(listOfProduct[i].getQuantityOnHand() - qtyRequired);
-					if (listOfProduct[i].getQuantityOnHand() <= listOfProduct[i].getReorderLevel()) {
+					listOfProduct.get(i).setQuantityOnHand(listOfProduct.get(i).getQuantityOnHand() - qtyRequired);
+					if (listOfProduct.get(i).getQuantityOnHand() <= listOfProduct.get(i).getReorderLevel()) {
 						System.out.println("purchase order is made");
 					}
 				}
@@ -77,12 +89,12 @@ public class Stores {
 	}
 	static void updateStock(int productCode, int arrivedQty) throws ProductNotFoundException{
 		boolean prodidfound = false; 
-		for (int i = 0; i < listOfProduct.length; i++) {
-			if (productCode == listOfProduct[i].getProductId()) {
+		for (int i = 0; i < listOfProduct.size(); i++) {
+			if (productCode == listOfProduct.get(i).getProductId()) {
 				prodidfound = true;
-				int oldQty = listOfProduct[i].getQuantityOnHand();
-				listOfProduct[i].setQuantityOnHand(listOfProduct[i].getQuantityOnHand() + arrivedQty);
-				System.out.println("Stock for "+productCode+" updated from "+oldQty+" to "+ listOfProduct[i].getQuantityOnHand());
+				int oldQty = listOfProduct.get(i).getQuantityOnHand();
+				listOfProduct.get(i).setQuantityOnHand(listOfProduct.get(i).getQuantityOnHand() + arrivedQty);
+				System.out.println("Stock for "+productCode+" updated from "+oldQty+" to "+ listOfProduct.get(i).getQuantityOnHand());
 			}
 		}
 		if (prodidfound == false) {
@@ -90,5 +102,6 @@ public class Stores {
 		}
 		
 	}
+	
 
 }
