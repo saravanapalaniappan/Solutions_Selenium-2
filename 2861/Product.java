@@ -1,12 +1,17 @@
-package com.htc.product;
+package com.java.newproduct;
 
-public class Product {
+public class Product implements Comparable<Product> {
 	int productId;
 	String productName; 
 	double price;
 	int quantityOnHand;
 	int reorderLevel;
 	int reorderQty;
+	
+	 public int compareTo(Product p)
+	  {
+	      return (int) (this.price - p.price);
+	  }
 	
 	public Product(int productId, String productName, double price, int quantityOnHand) {
 		super();
@@ -16,6 +21,14 @@ public class Product {
 		this.quantityOnHand = quantityOnHand;
 		this.reorderLevel = 10;
 		this.reorderQty = 50;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName="
+				+ productName + ", price=" + price + ", quantityOnHand="
+				+ quantityOnHand + ", reorderLevel=" + reorderLevel
+				+ ", reorderQty=" + reorderQty + "]";
 	}
 
 	public int getProductId() {
