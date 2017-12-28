@@ -1,0 +1,162 @@
+package com.htc.coreJavaExam2;
+
+import java.io.*;
+import java.util.*;
+
+public class Product implements Comparator<Product>{
+
+	private int productId;
+	private String productName;
+	private double price;
+	private int quantityOnHand,reorderLevel,reorderQty;
+
+	
+	public Product() {
+	}
+	
+	public Product(int productId, String productName, double price, int quantityOnHand) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.price = price;
+		this.quantityOnHand = quantityOnHand;
+		this.reorderLevel = 10;
+		this.reorderQty = 50;
+	}
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public int getQuantityOnHand() {
+		return quantityOnHand;
+	}
+	public void setQuantityOnHand(int quantityOnHand) {
+		this.quantityOnHand = quantityOnHand;
+	}
+	public int getReorderLevel() {
+		return reorderLevel;
+	}
+	public void setReorderLevel(int reorderLevel) {
+		this.reorderLevel = reorderLevel;
+	}
+	public int getReorderQty() {
+		return reorderQty;
+	}
+	public void setReorderQty(int reorderQty) {
+		this.reorderQty = reorderQty;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", price=" + price
+				+ ", quantityOnHand=" + quantityOnHand + ", reorderLevel=" + reorderLevel + ", reorderQty=" + reorderQty
+				+ "]";
+	}
+
+	@Override
+	public int compare(Product p1, Product p2) {
+		// TODO Auto-generated method stub
+		if(p1.getPrice()>p2.getPrice())
+			return -1;
+		else if(p1.getPrice()<p2.getPrice()) 
+			return 1;
+		else 
+			return 0;
+	}
+
+	public double compare(Product p) {
+		// TODO Auto-generated method stub
+		return this.getPrice()-p.getPrice() ;
+	}
+
+	
+	
+}
+
+package com.htc.coreJavaExam2;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+	public class Stores {
+
+		private ArrayList<Product> prod;
+		
+		public Stores() {
+			
+		}
+		
+		public Stores(ArrayList<Product> prod) {
+			super();
+			this.prod = prod;
+		}
+
+		public ArrayList<Product> getProd() {
+			return prod;
+		}
+
+		public void setProd(ArrayList<Product> prod) {
+			this.prod = prod;
+		}
+		
+		
+		
+		@Override
+		public String toString() {
+			return "Stores [prod=" + prod + "]";
+		}
+
+		public double sellItem(int productCode,int qtyRequired){
+		
+			double amount=0.0;
+		/*	for(Product prod1: prod) {
+				if(prod1.getProductId()==productCode)
+				{
+					if(qtyRequired<prod1.getQuantityOnHand())
+					{
+						amount=qtyRequired*prod1.getPrice();
+						prod1.setQuantityOnHand(qtyRequired-prod1.getQuantityOnHand());
+						if(prod1.getQuantityOnHand()<prod1.getReorderLevel())
+							System.out.println("Purchase order is made");
+							
+						prod1.setReorderLevel(qtyRequired);
+					}
+				}*/
+			
+			return amount; 
+		}
+		
+		public void updateStock(int productCode,int arrivalQty){
+			
+		}
+		
+		public static void main(String[] args) {
+			
+			ArrayList<Product> prod=new ArrayList<Product>();
+				prod.add(new Product(1000,"Soap",120.00,20));
+				prod.add(new Product(10,"Towel",250.00,20));
+				prod.add(new Product(12,"Drink",20.00,70));
+				prod.add(new Product(3,"water",10.00,60));
+				
+				Collections.sort(prod);
+				for(Product product: prod) {
+					System.out.println("Price:" + product.getPrice() + "\n productName: " + product.getProductName());
+				}
+		}
+		
+		
+	}
