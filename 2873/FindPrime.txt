@@ -1,0 +1,44 @@
+public class SearchPrimeC{
+    
+    int x;
+    int y;
+    int z;
+    
+    public void isPrime(int UserGiven)
+    
+    {
+        this.z = UserGiven;
+        for(x=2;x<=z;x++)
+        {
+            for(y=2;x<=x;y++)
+            {
+                if(y==x)
+                {
+                    System.out.println(x);
+                }
+                
+                if(x%y==0)
+                {
+                    break;
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+
+class SearchPrimeMain{
+    
+    public static void main(String[] args) {
+        
+        SearchPrimeC objPrim = new SearchPrimeC();
+        
+        objPrim.isPrime(50);
+        
+        //System.out.println("Good");
+        }
+   }
