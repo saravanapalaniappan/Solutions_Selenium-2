@@ -1,0 +1,109 @@
+package com.htc.coreJava4;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class Client {
+
+	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+		
+		Insurance ins1=new Insurance(123);
+		
+		Person p1=new Person("Abhi",ins1);
+		
+		ObjectOutputStream obj=new ObjectOutputStream(new FileOutputStream("C:\\Users\\r2fw\\Desktop\\Serialize2.txt"));
+		obj.writeObject(p1);
+		
+		ObjectInputStream obj1=new ObjectInputStream(new FileInputStream("C:\\Users\\r2fw\\Desktop\\Serialize2.txt"));
+		Person p2=(Person) obj1.readObject();
+		System.out.println(p2.getPersonName() + p2.getIssId());
+	}
+}
+
+
+package com.htc.coreJava4;
+
+import java.io.Serializable;
+
+public class Insurance {
+
+	private int insuranceId;
+
+	@Override
+	public String toString() {
+		return "Insurance [insuranceId=" + insuranceId + ", getInsuranceId()="
+				+ getInsuranceId() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
+
+	public int getInsuranceId() {
+		return insuranceId;
+	}
+
+	public void setInsuranceId(int insuranceId) {
+		this.insuranceId = insuranceId;
+	}
+
+	public Insurance(int insuranceId) {
+		super();
+		this.insuranceId = insuranceId;
+	}
+	
+	
+}
+
+
+package com.htc.coreJava4;
+
+import java.io.Serializable;
+
+public class Person implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String personName;
+	private transient Insurance issId;
+	
+	public Person() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Person(String personName, Insurance issId) {
+		super();
+		this.personName = personName;
+		this.issId = issId;
+	}
+
+
+	public String getPersonName() {
+		return personName;
+	}
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+	public Insurance getIssId() {
+		return issId;
+	}
+	public void setIssId(Insurance issId) {
+		this.issId = issId;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Person [personName=" + personName + ", issId=" + issId
+				+ ", getPersonName()=" + getPersonName() + ", getIssId()="
+				+ getIssId() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
+}
