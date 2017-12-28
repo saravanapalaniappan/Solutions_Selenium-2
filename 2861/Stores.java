@@ -34,7 +34,7 @@ public class Stores {
 			System.out.println("Product ID "+e.getProductCode() +" not found in list of Products available");
 		}
 		catch(InsufficientQuantityException e) {
-			System.out.println("Please procure "+e.getquantityOnHand() +" more items to complete this order");
+			System.out.println("Insufficient stock. Please procure "+e.getquantityOnHand() +" more items to complete this order");
 		}
 		System.out.println("Enter Product code of stock to be updated");
 		productCode = userinput.nextInt();
