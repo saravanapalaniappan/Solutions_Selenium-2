@@ -1,11 +1,15 @@
-package com.htc.coreJavaExam;
+package com.htc.coreJavaExam2;
 
-public class Product {
+import java.io.*;
+import java.util.*;
+
+public class Product implements Comparator<Product>{
 
 	private int productId;
 	private String productName;
 	private double price;
 	private int quantityOnHand,reorderLevel,reorderQty;
+
 	
 	public Product() {
 	}
@@ -62,7 +66,23 @@ public class Product {
 				+ ", quantityOnHand=" + quantityOnHand + ", reorderLevel=" + reorderLevel + ", reorderQty=" + reorderQty
 				+ "]";
 	}
-	
+
+	@Override
+	public int compare(Product p1, Product p2) {
+		// TODO Auto-generated method stub
+		if(p1.getPrice()>p2.getPrice())
+			return -1;
+		else if(p1.getPrice()<p2.getPrice()) 
+			return 1;
+		else 
+			return 0;
+	}
+
+	public double compare(Product p) {
+		// TODO Auto-generated method stub
+		return this.getPrice()-p.getPrice() ;
+	}
+
 	
 	
 }
