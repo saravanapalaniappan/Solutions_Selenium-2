@@ -1,11 +1,11 @@
-package com.htc.coreJavaExam;
+package com.htc.coreJava1;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Stores {
 
-	private ArrayList<Product> prod;
+private ArrayList<Product> prod;
 	
 	public Stores() {
 		
@@ -23,7 +23,6 @@ public class Stores {
 	public void setProd(ArrayList<Product> prod) {
 		this.prod = prod;
 	}
-	
 	
 	
 	@Override
@@ -51,21 +50,31 @@ public class Stores {
 				else
 					throw new InsufficientQuantityException();
 			}
-			if(flag=false)
-				throw new ProductNotFoundException();
-			}
+
+		}
+		if(flag==false)
+			throw new ProductNotFoundException();
 		
 		return amount;
 	}
 	
 	public void updateStock(int productCode,int arrivalQty) throws ProductNotFoundException{
 		
+		boolean flag=false;
+		for(Product prod1: prod) {
+			if(prod1.getProductId()==productCode)
+			{
+				flag=true;
+				prod1.setQuantityOnHand(prod1.getQuantityOnHand()+arrivalQty);
+				System.out.println("Quantity updated for the product code:" + prod1.getProductId() + " to the quantity:" + (prod1.getQuantityOnHand()+arrivalQty));
+			}
+		}
+		if (flag==false)
+			throw new ProductNotFoundException();
+				
 	}
 	
 	public static void main(String[] args) {
-		
-		Product obj;
-		
 		
 		ArrayList<Product> prod=new ArrayList<Product>();
 		
@@ -78,8 +87,23 @@ public class Stores {
 			
 			Stores obj1=new Stores(prod);
 			
-			double amount=obj1.sellItem(103, 30);
+			Scanner scan=new Scanner(System.in);
+			
+			System.out.println("Please enter product code you want to buy:");
+			int code1=scan.nextInt();
+			System.out.println("Please enter quantity to buy for the product code selected:");
+			int code2=scan.nextInt(); 
+			
+			double amount=obj1.sellItem(code1,code2);
 			System.out.println("Total Amount for selected product: " + amount);
+			
+			
+			System.out.println("Please enter product code to update the quantity:");
+			int code3=scan.nextInt();
+			System.out.println("Please enter quantity to update for the product code selected:");
+			int code4=scan.nextInt();
+			scan.close();
+			obj1.updateStock(code3, code4);
 		}
 		catch (ProductNotFoundException PNFE)
 		{
@@ -90,10 +114,11 @@ public class Stores {
 			System.out.println("You have Requested more than available quantity");
 		}
 		catch (Exception ex) {
-			System.out.println("in Main exception");
+			System.out.println("Exception Handled");
+		}
+		finally{
+			prod.clear();
 		}
 		
 	}
-	
-	
 }
