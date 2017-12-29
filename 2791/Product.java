@@ -1,11 +1,14 @@
-package com.htc.coreJavaExam;
+package com.htc.coreJava2;
 
-public class Product {
+//import java.util.*;
+
+public class Product implements Comparable<Product>{
 
 	private int productId;
 	private String productName;
 	private double price;
 	private int quantityOnHand,reorderLevel,reorderQty;
+
 	
 	public Product() {
 	}
@@ -58,11 +61,17 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", price=" + price
-				+ ", quantityOnHand=" + quantityOnHand + ", reorderLevel=" + reorderLevel + ", reorderQty=" + reorderQty
-				+ "]";
+		return "Product [productId=" + productId  +",\n productName=" + productName  +",\n price="  +price
+				+ ",\n quantityOnHand=" + quantityOnHand + ",\n reorderLevel=" + reorderLevel  + ",\n reorderQty=" + reorderQty + "]";
 	}
-	
+
+
+
+	public int compareTo(Product p) {
+		// TODO Auto-generated method stub
+		return (int) (this.getPrice()-p.getPrice()) ;
+	}
+
 	
 	
 }
