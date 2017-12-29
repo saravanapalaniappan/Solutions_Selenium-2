@@ -1,0 +1,120 @@
+package com.htc.issueapp.dto;
+
+import java.util.Date;
+
+public class Issue {
+	int issueId;
+	Date issueGeneratedDate;
+	String issueCategory;
+	String issueDescription;
+	public int getIssueId() {
+		return issueId;
+	}
+	public void setIssueId(int issueId) {
+		this.issueId = issueId;
+	}
+	public Date getIssueGeneratedDate() {
+		return issueGeneratedDate;
+	}
+	public void setIssueGeneratedDate(Date issueGeneratedDate) {
+		this.issueGeneratedDate = issueGeneratedDate;
+	}
+	public String getIssueCategory() {
+		return issueCategory;
+	}
+	public void setIssueCategory(String issueCategory) {
+		this.issueCategory = issueCategory;
+	}
+	public String getIssueDescription() {
+		return issueDescription;
+	}
+	public void setIssueDescription(String issueDescription) {
+		this.issueDescription = issueDescription;
+	}
+	@Override
+	public String toString() {
+		return "Issue [issueId=" + issueId + ", issueGeneratedDate="
+				+ issueGeneratedDate + ", issueCategory=" + issueCategory
+				+ ", issueDescription=" + issueDescription + "]";
+	}
+	public Issue(int issueId, Date issueGeneratedDate, String issueCategory,
+			String issueDescription) {
+		super();
+		this.issueId = issueId;
+		this.issueGeneratedDate = issueGeneratedDate;
+		this.issueCategory = issueCategory;
+		this.issueDescription = issueDescription;
+	}
+	
+}
+--------------
+package com.htc.issueapp.dao;
+
+import java.util.*;
+
+import com.htc.issueapp.exceptions.*;
+import com.htc.issueapp.dto.*;
+
+public interface IissueServiceProvider {
+
+	public boolean createIssue(int issueId, Date issueGeneratedDate, String issueCategory, String issueDescription)throws IssueNotFoundException ;
+	public Issue readIssue(int issueId)throws IssueNotFoundException, ExistingIssueIdException;
+	public boolean updateIssue(int id, String category,
+			String description) throws IssueNotFoundException;
+//	public boolean updateIssue(int issueId, Date issueGeneratedDate, String issueCategory, String issueDescription)throws IssueNotFoundException ;
+	public boolean deleteIssue(int issueId)throws IssueNotFoundException ;
+	
+}
+------------------
+package com.htc.issueapp.dao;
+
+import java.util.Date;
+
+import com.htc.issueapp.dto.Issue;
+import com.htc.issueapp.exceptions.IssueNotFoundException;
+
+public class IssueServiceProviderImpl implements IissueServiceProvider{
+
+	@Override
+	public boolean createIssue(int issueId, Date issueGeneratedDate,
+			String issueCategory, String issueDescription)
+			throws IssueNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Issue readIssue(int issueId) throws IssueNotFoundException {
+		// TODO Auto-generated method stub
+		return Issue;
+	}
+
+	public boolean updateIssue(int issueId, Date issueGeneratedDate,
+			String issueCategory, String issueDescription)
+			throws IssueNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean updateIssue(int issueId, 
+			String issueCategory, String issueDescription)
+			throws IssueNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public boolean updateIssue(int issueId, 
+			String issueCategory)
+			throws IssueNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	@Override
+	public boolean deleteIssue(int issueId) throws IssueNotFoundException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
